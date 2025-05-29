@@ -73,6 +73,7 @@ public class OwnerServiceTest {
 		Owner owner = null;
 
 	}
+
 	@Test
 	public void testUpdateOwner() {
 		Owner owner = new Owner("Carlos", "Lopez", "Av 123", "Lima", "999999999");
@@ -81,19 +82,11 @@ public class OwnerServiceTest {
 		savedOwner.setFirstName("Luis");
 		savedOwner.setCity("Cusco");
 
-		Owner updatedOwner = null;
-
-		try {
-			updatedOwner = ownerService.update(savedOwner);
-		} catch (OwnerNotFoundException e) {
-			fail("Owner not found: " + e.getMessage());
-		}
+		Owner updatedOwner = ownerService.update(savedOwner);
 
 		assertEquals("Luis", updatedOwner.getFirstName());
 		assertEquals("Cusco", updatedOwner.getCity());
 
 		log.info("UPDATED OWNER: {}", updatedOwner);
 	}
-}
-
 }
