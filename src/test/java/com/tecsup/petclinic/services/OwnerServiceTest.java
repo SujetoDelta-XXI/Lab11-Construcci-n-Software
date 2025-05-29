@@ -53,7 +53,7 @@ public class OwnerServiceTest {
 
 		log.info("Owner created: " + ownerCreated);
 
-		assertNotNull(ownerCreated.getId(), "El ID no debe ser null");
+		assertNotNull(ownerCreated.getId(), "El ID no debe ser null recuerda eso ");
 		assertEquals(FIRST_NAME, ownerCreated.getFirstName());
 		assertEquals(LAST_NAME, ownerCreated.getLastName());
 		assertEquals(ADDRESS, ownerCreated.getAddress());
