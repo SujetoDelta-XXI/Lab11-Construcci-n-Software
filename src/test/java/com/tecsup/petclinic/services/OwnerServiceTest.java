@@ -67,6 +67,22 @@ public class OwnerServiceTest {
 	}
 
 	@Test
+	public void testUpdateOwner() {
+		Owner owner = new Owner("Carlos", "Lopez", "Av 123", "Lima", "999999999");
+		Owner savedOwner = ownerService.create(owner);
+
+		savedOwner.setFirstName("Luis");
+		savedOwner.setCity("Cusco");
+
+		Owner updatedOwner = ownerService.update(savedOwner);
+
+		assertEquals("Luis", updatedOwner.getFirstName());
+		assertEquals("Cusco", updatedOwner.getCity());
+
+		log.info("UPDATED OWNER: {}", updatedOwner);
+	}
+
+	@Test
 	public void testFindOwnerByName() {
 
 		String NAME = "Betty";
