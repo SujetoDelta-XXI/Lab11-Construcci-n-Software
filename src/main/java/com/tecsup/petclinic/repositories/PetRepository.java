@@ -1,24 +1,32 @@
 package com.tecsup.petclinic.repositories;
 
-import com.tecsup.petclinic.entities.Pet;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-@Repository
-public interface PetRepository extends JpaRepository<Pet, Integer> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-	// Buscar por nombre exacto
+import com.tecsup.petclinic.entities.Pet;
+
+/**
+ *
+ * @author jgomezm
+ *
+ */
+@Repository
+public interface PetRepository
+	extends JpaRepository<Pet, Integer> {
+
+	// Fetch pets by name
 	List<Pet> findByName(String name);
 
-	// Buscar por tipo (ej. 1=cat, 2=dog...)
+	// Fetch pets by typeId
 	List<Pet> findByTypeId(int typeId);
 
-	// Buscar todas las mascotas de un owner específico
+	// Fetch pets by ownerId
 	List<Pet> findByOwnerId(int ownerId);
 
-	// Ya viene por defecto con JpaRepository, pero puedes redefinirlo si quieres
 	@Override
 	List<Pet> findAll();
+
 }

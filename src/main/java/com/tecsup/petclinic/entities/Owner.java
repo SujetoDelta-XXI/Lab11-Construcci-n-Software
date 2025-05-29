@@ -13,14 +13,19 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false, length = 30)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false, length = 30)
     private String lastName;
 
+    @Column(nullable = false, length = 255)
     private String address;
+
+    @Column(nullable = false, length = 80)
     private String city;
+
+    @Column(nullable = false, length = 20)
     private String telephone;
 
     public Owner(Integer id, String firstName, String lastName, String address, String city, String telephone) {
@@ -39,4 +44,5 @@ public class Owner {
         this.city = city;
         this.telephone = telephone;
     }
+
 }
