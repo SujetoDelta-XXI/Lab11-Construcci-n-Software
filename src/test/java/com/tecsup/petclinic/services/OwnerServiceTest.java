@@ -25,13 +25,13 @@ public class OwnerServiceTest {
 	@Test
 	public void testFindOwnerById() {
 
-		long ID = 1;
-		String NAME = "Jaime";
+		Integer ID = 2;
+		String NAME = "Betty";
 		Owner owner = null;
 		
 		try {
-
 			owner = ownerService.findById(ID);
+			System.out.println("Usuario encontrado: " + owner);
 
 		} catch (OwnerNotFoundException e) {
 			fail(e.getMessage());
