@@ -1,12 +1,9 @@
 package com.tecsup.petclinic.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +22,7 @@ public class OwnerServiceTest {
 	@Test
 	public void testFindOwnerById() {
 
-		Integer ID = 2;
+		Integer ID = 1;
 		String NAME = "Betty";
 		Owner owner = null;
 		
@@ -39,6 +36,14 @@ public class OwnerServiceTest {
 		log.info("" + owner);
 
 		assertEquals(NAME, owner.getFirstName());
+
+	}
+
+	@Test
+	public void testFindOwnerByName() {
+
+		String NAME = "Betty";
+		Owner owner = null;
 
 	}
 
