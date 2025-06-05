@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OwnerServiceTest {
 
 	@Autowired
-   		private OwnerService ownerService;
+	private OwnerService ownerService;
 
 	@Test
 	public void testFindOwnerById() {
@@ -64,6 +64,57 @@ public class OwnerServiceTest {
 		} catch (OwnerNotFoundException e) {
 			fail("No se pudo eliminar el owner de prueba: " + e.getMessage());
 		}
+	}
+
+	@Test
+	public void testUpdateOwner() {
+
+		// Paso 1: Crear un Owner temporal
+		Owner owner = new Owner("Carlos", "Ramirez", "Av. Siempre Viva", "Trujillo", "900000000");
+		Owner createdOwner = ownerService.create(owner);
+
+		// Paso 2: Modificar datos
+		createdOwner.setFirstName("Carlos A.");
+		createdOwner.setCity("Lima");
+
+		// Paso 3: Ejecutar actualización
+		Owner updatedOwner = ownerService.update(createdOwner);
+
+		// Paso 4: Verificar cambios
+		assertEquals("Carlos A.", updatedOwner.getFirstName());
+		assertEquals("Lima", updatedOwner.getCity());
+		log.info("UPDATED OWNER: {}", updatedOwner);
+
+		// Paso 5: Eliminar para limpiar
+		try {
+			ownerService.delete(updatedOwner.getId());
+		} catch (OwnerNotFoundException e) {
+			fail("No se pudo eliminar el owner de prueba: " + e.getMessage());
+		}
+	}
+
+	@Test
+	public void testDeleteOwner() {
+
+		// Paso 1: Crear un Owner temporal
+		Owner owner = new Owner("Temporal", "Eliminar", "Av. Central", "Arequipa", "999999999");
+		Owner createdOwner = ownerService.create(owner);
+
+		Integer id = createdOwner.getId();
+		assertNotNull(id);
+		log.info("OWNER A ELIMINAR: {}", createdOwner);
+
+		// Paso 2: Eliminar
+		try {
+			ownerService.delete(id);
+		} catch (OwnerNotFoundException e) {
+			fail("Error eliminando el Owner: " + e.getMessage());
+		}
+
+		// Paso 3: Verificar que ya no existe
+		assertThrows(OwnerNotFoundException.class, () -> {
+			ownerService.findById(id);
+		});
 	}
 
 	@Test
