@@ -65,7 +65,7 @@ public class OwnerServiceTest {
 			fail("No se pudo eliminar el owner de prueba: " + e.getMessage());
 		}
 	}
-xdddddddd
+
 	@Test
 	public void testUpdateOwner() {
 
