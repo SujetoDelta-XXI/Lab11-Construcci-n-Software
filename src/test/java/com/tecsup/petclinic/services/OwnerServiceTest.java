@@ -85,7 +85,7 @@ public class OwnerServiceTest {
 		try {
 			ownerService.delete(updatedOwner.getId());  //eliminar para limpiar
 		} catch (OwnerNotFoundException e) {
-			fail("No se pudo eliminar el owner de prueba: " + e.getMessage());
+			fail("No se pudo eliminar correctamente " + e.getMessage());
 		}
 	}
 
@@ -100,14 +100,12 @@ public class OwnerServiceTest {
 		assertNotNull(id);
 		log.info("OWNER A ELIMINAR: {}", createdOwner);
 
-		//eliminar
 		try {
 			ownerService.delete(id);        //eliminar
 		} catch (OwnerNotFoundException e) {
 			fail("Error eliminando el Owner: " + e.getMessage());
 		}
 
-		//verificar que ya no existe
 		assertThrows(OwnerNotFoundException.class, () -> { //verificar
 			ownerService.findById(id);
 		});
