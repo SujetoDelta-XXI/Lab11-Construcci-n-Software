@@ -69,25 +69,21 @@ public class OwnerServiceTest {
 	@Test
 	public void testUpdateOwner() {
 
-		// Paso 1: Crear un Owner temporal
+		//Crear un Owner temporal
 		Owner owner = new Owner("Carlos", "Ramirez", "Av. Siempre Viva", "Trujillo", "900000000");
 		Owner createdOwner = ownerService.create(owner);
 
-		// Paso 2: Modificar datos
-		createdOwner.setFirstName("Carlos A.");
+		createdOwner.setFirstName("Carlos A."); //Actualizar datos
 		createdOwner.setCity("Lima");
 
-		// Paso 3: Ejecutar actualización
-		Owner updatedOwner = ownerService.update(createdOwner);
+		Owner updatedOwner = ownerService.update(createdOwner); //ejecutar actualización
 
-		// Paso 4: Verificar cambios
-		assertEquals("Carlos A.", updatedOwner.getFirstName());
+		assertEquals("Carlos A.", updatedOwner.getFirstName()); //verificar cambios
 		assertEquals("Lima", updatedOwner.getCity());
 		log.info("UPDATED OWNER: {}", updatedOwner);
 
-		// Paso 5: Eliminar para limpiar
 		try {
-			ownerService.delete(updatedOwner.getId());
+			ownerService.delete(updatedOwner.getId());  //eliminar para limpiar
 		} catch (OwnerNotFoundException e) {
 			fail("No se pudo eliminar el owner de prueba: " + e.getMessage());
 		}
@@ -96,7 +92,7 @@ public class OwnerServiceTest {
 	@Test
 	public void testDeleteOwner() {
 
-		// Paso 1: Crear un Owner temporal
+		//crear un Owner temporal
 		Owner owner = new Owner("Temporal", "Eliminar", "Av. Central", "Arequipa", "999999999");
 		Owner createdOwner = ownerService.create(owner);
 
@@ -104,15 +100,15 @@ public class OwnerServiceTest {
 		assertNotNull(id);
 		log.info("OWNER A ELIMINAR: {}", createdOwner);
 
-		// Paso 2: Eliminar
+		//eliminar
 		try {
-			ownerService.delete(id);
+			ownerService.delete(id);        //eliminar
 		} catch (OwnerNotFoundException e) {
 			fail("Error eliminando el Owner: " + e.getMessage());
 		}
 
-		// Paso 3: Verificar que ya no existe
-		assertThrows(OwnerNotFoundException.class, () -> {
+		//verificar que ya no existe
+		assertThrows(OwnerNotFoundException.class, () -> { //verificar
 			ownerService.findById(id);
 		});
 	}
