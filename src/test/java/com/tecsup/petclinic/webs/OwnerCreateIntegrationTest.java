@@ -36,30 +36,29 @@ public class OwnerCreateIntegrationTest {
 
     @Test
     void shouldCreateNewOwnerSuccessfully() throws Exception {
-        // Arrange
-        OwnerDTO newOwner = new OwnerDTO(null, "Lucía", "Martínez", "Av. Primavera", "Trujillo", "987123456");
+        // Crear
+        OwnerDTO newOwner = new OwnerDTO(null, "Carlos", "Asparrin", "Av. Primavera", "Lima", "975413227");
         String requestJson = objectMapper.writeValueAsString(newOwner);
-        log.info("📨 JSON enviado al endpoint: {}", requestJson);
+        log.info("JSON enviado al endpoint: {}", requestJson);
 
-        // Act
+        // Llamar datos
         MvcResult result = mockMvc.perform(post("/owners")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.firstName", is("Lucía")))
-                .andExpect(jsonPath("$.city", is("Trujillo")))
+                .andExpect(jsonPath("$.firstName", is("Carlos")))
+                .andExpect(jsonPath("$.city", is("Lima")))
                 .andReturn();
 
-        // Log response
         String responseJson = result.getResponse().getContentAsString();
-        log.info("📥 Respuesta JSON recibida: {}", responseJson);
+        log.info("Respuesta JSON recibida: {}", responseJson);
 
-        // Assert adicional: confirmar que se guardó en BD
+        //BD
         boolean exists = ownerRepository.findAll()
                 .stream()
                 .anyMatch(o -> o.getFirstName().equals("Lucía") && o.getCity().equals("Trujillo"));
 
         assertTrue(exists);
-        log.info("✅ Owner correctamente guardado en base de datos.");
+        log.info("Owner correctamente guardado en base de datos.");
     }
 }
