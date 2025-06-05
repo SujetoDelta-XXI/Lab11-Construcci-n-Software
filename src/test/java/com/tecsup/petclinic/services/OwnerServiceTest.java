@@ -40,11 +40,11 @@ public class OwnerServiceTest {
 	@Test
 	public void testCreateOwner() {
 
-		String FIRST_NAME = "jurgen";
-		String LAST_NAME = "calle";
-		String ADDRESS = "Av.las flores";
-		String CITY = "Cuzco";
-		String TELEPHONE = "987600243";
+		String FIRST_NAME = "josuesito";
+		String LAST_NAME = "regliati";
+		String ADDRESS = "Av.los proceres";
+		String CITY = "Lurin";
+		String TELEPHONE = "987600063";
 
 		Owner owner = new Owner(FIRST_NAME, LAST_NAME, ADDRESS, CITY, TELEPHONE);
 
